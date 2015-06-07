@@ -2,3 +2,6 @@ en:
   lita:
     handlers:
       wolfram_alpha:
+        help:
+          query_key: "wa QUERY"
+          query_value: "Ask Wolfram Alpha about QUERY."
