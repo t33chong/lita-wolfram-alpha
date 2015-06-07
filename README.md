@@ -24,7 +24,7 @@ end
 ```
 
 ### Optional attributes
-* `hide_link` (boolean) - By default, Lita returns a Wolfram Alpha link containing additional information after providing the best answer. If `hide_link` is set to true, this link is omitted.
+* `hide_link` (boolean) - By default, Lita returns a Wolfram Alpha link containing additional information after providing the best answer. If `hide_link` is set to `true`, this link is omitted.
 
 ``` ruby
 Lita.configure do |config|
