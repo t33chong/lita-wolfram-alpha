@@ -34,7 +34,7 @@ describe Lita::Handlers::WolframAlpha, lita_handler: true do
     it "returns the concatenated pod and subpod titles when they exist, separating the titles from the answer with a newline when the answer contains multiple lines" do
       send_command "wa weather forecast for san francisco"
       expect(replies.count).to eq 2
-      expect(replies.first).to match(/^Weather forecast for San Francisco, California -> Today:\nbetween/)
+      expect(replies.first).to match(/^Weather forecast for San Francisco, California -> \w+:\nbetween/)
       expect(replies.last).to match(/^http:\/\/www\.wolframalpha\.com\/input\/\?i=weather\+forecast\+for\+san\+francisco$/)
       end
 
