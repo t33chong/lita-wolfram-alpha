@@ -22,21 +22,38 @@ module Lita
           appid: config.app_id
         )
         return if http_response.status != 200
-        link = "Learn more: http://www.wolframalpha.com/input/?i=#{CGI.escape(input)}"
+        link = "http://www.wolframalpha.com/input/?i=#{CGI.escape(input)}"
         xml = Nokogiri::XML(http_response.body)
         primary = xml.at_xpath("//pod[@primary='true']//plaintext[string-length(text()) > 0]")
         if primary
-          response.reply primary.content
+          response.reply format_reply(primary)
           response.reply link unless config.hide_link
         else
           secondary = xml.at_xpath("//pod[not(@id='Input')]//plaintext[string-length(text()) > 0]")
           if secondary
-            response.reply secondary.content
+            response.reply format_reply(secondary)
             response.reply link unless config.hide_link
           else
             response.reply "¯\\_(ツ)_/¯"
           end
         end
+      end
+
+      private
+
+      # pod: plaintext
+      # pod -> subpod: plaintext
+      # subpod: plaintext
+      # plaintext
+      def format_reply(node)
+        subpod = node.parent
+        subpod_title = subpod.attribute("title").content
+        pod = subpod.parent
+        pod_title = pod.attribute("title").content
+        title = [pod_title, subpod_title].select {|t| t.length > 0 && t !~ /^Results?$/}.join(" -> ")
+        colon = title.length > 0 ? ":" : ""
+        whitespace = node.content =~ /\n/ ? "\n" : " "
+        "#{title}#{colon}#{whitespace}#{node.content}".strip
       end
 
     end
