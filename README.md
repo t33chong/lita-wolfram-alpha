@@ -44,7 +44,7 @@ Specify a [Wolfram Alpha query](http://www.wolframalpha.com/examples/?src=input)
 <lita> Tagalog | 765033 people
 <lita> Vietnamese | 512456 people
 <lita> (2008-2012 American Community Survey 5-year estimates)
-<lita> Learn more: http://www.wolframalpha.com/input/?i=most+commonly+spoken+languages+in+california
+<lita> http://www.wolframalpha.com/input/?i=most+commonly+spoken+languages+in+california
 ```
 
 ## License
